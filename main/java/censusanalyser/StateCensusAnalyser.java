@@ -9,19 +9,19 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
 
-public class CensusAnalyser {
-    public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
+public class StateCensusAnalyser {
+    public int loadStateCensusData(String csvFilePath) throws CensusAnalyserException {
         try {
             Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
-            CsvToBeanBuilder<IndiaCensusCSV> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
-            csvToBeanBuilder.withType(IndiaCensusCSV.class);
+            CsvToBeanBuilder<StateCensusCSV> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
+            csvToBeanBuilder.withType(StateCensusCSV.class);
             csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
-            CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
-            Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();;
+            CsvToBean<StateCensusCSV> csvToBean = csvToBeanBuilder.build();
+            Iterator<StateCensusCSV> censusCSVIterator = csvToBean.iterator();;
             int namOfEateries = 0;
             while (censusCSVIterator.hasNext()) {
                 namOfEateries++;
-                IndiaCensusCSV censusData = censusCSVIterator.next();
+                StateCensusCSV censusData = censusCSVIterator.next();
             }
             return namOfEateries;
         } catch (IOException e) {
