@@ -17,7 +17,7 @@ public class StateCensusAnalyser {
             csvToBeanBuilder.withType(StateCensusCSV.class);
             csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
             CsvToBean<StateCensusCSV> csvToBean = csvToBeanBuilder.build();
-            Iterator<StateCensusCSV> censusCSVIterator = csvToBean.iterator();;
+            Iterator<StateCensusCSV> censusCSVIterator = csvToBean.iterator();
             int namOfEateries = 0;
             while (censusCSVIterator.hasNext()) {
                 namOfEateries++;
@@ -27,6 +27,9 @@ public class StateCensusAnalyser {
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        } catch (RuntimeException e){
+            throw new CensusAnalyserException(e.getMessage(),
+                    CensusAnalyserException.ExceptionType.INCORRECT_FILE_TYPE);
         }
     }
 }
